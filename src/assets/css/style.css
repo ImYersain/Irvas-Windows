@@ -1802,6 +1802,10 @@ textarea:focus {
   .popup_calc_profile_button {
     padding: 1rem 5rem;
   }
+
+  .fadeInUp {
+    animation-name: fade;
+    animation-duration: 1.5s; }
 }
 
 /* small devices, tablets */

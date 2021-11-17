@@ -1802,7 +1802,7 @@ textarea:focus {
   .popup_calc_profile_button {
     padding: 1rem 5rem;
   }
-}
+
 
 /* small devices, tablets */
 @media only screen and (max-width: 768px) {
