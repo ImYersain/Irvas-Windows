@@ -5,7 +5,7 @@ const forms = () => {
     const   form = document.querySelectorAll('form'),
             inputs = document.querySelectorAll('input');
     const message = {
-        loading: 'Загрузка...',
+        loading: 'img/form/spinner.svg',
         success: 'Спасибо, мы с вами скоро свяжемся',
         failure: 'Ошибка, что то пошло не так...'
     };

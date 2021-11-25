@@ -19785,6 +19785,7 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_1__["default"])();
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])('.glazing_slider', '.glazing_block', '.glazing_content', 'active');
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])('.decoration_slider', '.no_click', '.decoration_content >div>div', 'after_click');
+  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])('.balcon_icons', '.balcon_icons_img', '.big_img > img', 'do_image_more', 'inline-block');
   Object(_modules_forms__WEBPACK_IMPORTED_MODULE_3__["default"])();
 });
 
@@ -19825,7 +19826,7 @@ var forms = function forms() {
   var form = document.querySelectorAll('form'),
       inputs = document.querySelectorAll('input');
   var message = {
-    loading: 'Загрузка...',
+    loading: 'img/form/spinner.svg',
     success: 'Спасибо, мы с вами скоро свяжемся',
     failure: 'Ошибка, что то пошло не так...'
   };
@@ -19912,25 +19913,37 @@ __webpack_require__.r(__webpack_exports__);
 
 var modals = function modals() {
   function bindModal(triggerSelector, modalSeclector, closeSelector) {
+    var closeClickOverlay = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
     var trigger = document.querySelectorAll(triggerSelector),
         modal = document.querySelector(modalSeclector),
-        modalClose = document.querySelector(closeSelector);
+        modalClose = document.querySelector(closeSelector),
+        windows = document.querySelectorAll('[data-modal]');
     trigger.forEach(function (item) {
       item.addEventListener('click', function (e) {
         if (e.target) {
           e.preventDefault();
         }
 
+        windows.forEach(function (item) {
+          /* закрываем все модальные окна, дальше по коду используем кнопкой close и нажатием на подложку */
+          item.style.display = 'none';
+        });
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden';
       });
     });
     modalClose.addEventListener('click', function () {
+      windows.forEach(function (item) {
+        item.style.display = 'none';
+      });
       modal.style.display = 'none';
       document.body.style.overflow = '';
     });
     modal.addEventListener('click', function (e) {
-      if (e.target == modal) {
+      if (e.target == modal && closeClickOverlay) {
+        windows.forEach(function (item) {
+          item.style.display = 'none';
+        });
         modal.style.display = 'none';
         document.body.style.overflow = '';
       }
@@ -19946,6 +19959,9 @@ var modals = function modals() {
 
   bindModal('.popup_engineer_btn', '.popup_engineer', '.popup_engineer .popup_close');
   bindModal('.phone_link', '.popup', '.popup .popup_close');
+  bindModal('.popup_calc_btn', '.popup_calc', '.popup_calc_close');
+  bindModal('.popup_calc_button', '.popup_calc_profile', '.popup_calc_profile_close', false);
+  bindModal('.popup_calc_profile_button', '.popup_calc_end', '.popup_calc_end_close', false);
   showThanksModalByTime('.popup', 60000);
 };
 
@@ -19967,6 +19983,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var tabs = function tabs(headerSelector, tabsSelector, contentSelector, activeClass) {
+  var display = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'block';
   var header = document.querySelector(headerSelector),
       tabs = document.querySelectorAll(tabsSelector),
       content = document.querySelectorAll(contentSelector);
@@ -19982,7 +19999,7 @@ var tabs = function tabs(headerSelector, tabsSelector, contentSelector, activeCl
   }
 
   function showTabContent(i) {
-    content[i].style.display = 'block';
+    content[i].style.display = display;
     content[i].classList.add('fadeIn');
     tabs[i].classList.add(activeClass);
   }
