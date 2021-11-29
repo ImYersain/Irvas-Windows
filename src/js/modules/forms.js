@@ -1,10 +1,13 @@
 import axios from 'axios';
-
+import checkNumInputs from './checkNumInputs';
 
 const forms = () => {
     const   form = document.querySelectorAll('form'),
             inputs = document.querySelectorAll('input');
-    const message = {
+
+    checkNumInputs('input[name="user_phone"]');
+
+    const   message = {
         loading: 'img/form/spinner.svg',
         success: 'Спасибо, мы с вами скоро свяжемся',
         failure: 'Ошибка, что то пошло не так...'
