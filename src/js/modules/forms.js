@@ -1,9 +1,11 @@
 import axios from 'axios';
 import checkNumInputs from './checkNumInputs';
 
-const forms = () => {
+const forms = (state) => {
     const   form = document.querySelectorAll('form'),
-            inputs = document.querySelectorAll('input');
+            inputs = document.querySelectorAll('input'),
+            formWrappers = document.querySelectorAll('[data-wrapper]');
+
 
     checkNumInputs('input[name="user_phone"]');
 
@@ -15,13 +17,17 @@ const forms = () => {
 
     const  postData = async (url, data) => {
         document.querySelector('.status').textContent = message.loading;
-        // let res = await fetch(url,{
+        // let res = await fetch(url,{         просто вариант поста с фетчем, без отправки даты прям в датабазы, было изменено на пост с библиотекой эксиос, для отправки даты в дб.
         //     method: 'POST',
         //     body: data
         // });
         let res = await axios.post(url, {
             'user_name': data.name,
             'user_phone': data.phone,
+            'window_type': data.type,
+            'window_profile': data.profile,
+            'window_width': data.width,
+            'window.height': data.height
         });
         
         // return await res.text();
@@ -50,6 +56,11 @@ const forms = () => {
                 name : item.querySelector('[name = "user_name"]').value,
                 phone : item.querySelector('[name = "user_phone"]').value,
             };
+            if(item.getAttribute('data-calc') === 'end'){
+                for(let key in state){
+                    Object.assign(formData, state);
+                }
+            }
             console.log(formData);
 
 
@@ -66,6 +77,12 @@ const forms = () => {
                     setTimeout(() => {
                         statusMessage.remove();
                     }, 5000);
+                    setTimeout(()=>{
+                        formWrappers.forEach((item) =>{
+                            item.style.display = 'none';
+                            document.body.style.overflow = '';
+                        });
+                    }, 6000);
                 },);
         });
 

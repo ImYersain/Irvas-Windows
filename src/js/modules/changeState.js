@@ -5,7 +5,7 @@ const changeState = (state) => {
     const   windowForm = document.querySelectorAll('.balcon_icons_img'),
             windowWidth = document.querySelectorAll('#width'),
             windowHeight = document.querySelectorAll('#height'),
-            windowType = document.querySelector('#view_type'),
+            windowType = document.querySelectorAll('#view_type'),
             windowProfile = document.querySelectorAll('.checkbox');
     
     checkNumInputs('#width');
@@ -36,10 +36,11 @@ const changeState = (state) => {
                         break;
                 }
 
-                console.log(state);
+                // console.log(state);
             });
         });
     }
+
 
 
 
