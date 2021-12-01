@@ -5,7 +5,7 @@ const timer = (id, deadline) => {
         } else {
             return num;
         }
-    }
+    };
 
     const getTimeRemaining = (endtime) => {
         const   t = Date.parse(endtime) - Date.parse(new Date()),

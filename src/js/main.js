@@ -4,6 +4,7 @@ import tabs from './modules/tabs';
 import forms from './modules/forms';
 import changeState from './modules/changeState';
 import timer from './modules/timer';
+import images from './modules/images';
 
 window.addEventListener('DOMContentLoaded', () => {
     'use strict';
@@ -18,5 +19,6 @@ window.addEventListener('DOMContentLoaded', () => {
     tabs('.balcon_icons','.balcon_icons_img','.big_img > img', 'do_image_more', 'inline-block');
     forms(state);
     timer('.container1', deadline);
+    images();
     
 });
