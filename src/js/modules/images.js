@@ -3,7 +3,7 @@ const images = () => {
             section = document.querySelector('.works'),
             bigImg = document.createElement('img');
 
-    imgPopup.classList.add('popup');
+    imgPopup.classList.add('popup_img');
     section.appendChild(imgPopup);
     imgPopup.appendChild(bigImg);
 
@@ -20,9 +20,12 @@ const images = () => {
             const path = target.parentNode.getAttribute('href');
             bigImg.setAttribute('src', path);
             document.body.style.overflow = 'hidden';
+            bigImg.style.maxWidth = '70%';
+            bigImg.style.maxHeight = '70%';
+            bigImg.style.borderRadius = '10px';
         }
 
-        if(target && target.matches('.popup')){
+        if(target && target.matches('.popup_img')){
             imgPopup.style.display = 'none';
             document.body.style.overflow = '';
         }
